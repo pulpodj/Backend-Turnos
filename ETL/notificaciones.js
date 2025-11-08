@@ -1,12 +1,9 @@
 const {pool,poolMy,poolPg} = require('../database/dbconfig');
 const sql = require('mssql');
 const axios = require('axios');
-const { date } = require('azure');
 const moment = require('moment-timezone');
 const { use } = require('react');
-const urlPhysisWeb = "https://cuentas.cooperativalehmann.coop";
-const userPhysis =  process.env.ADMIN_USER ;
-const passPhysis =  process.env.ADMIN_PASSWORD ;
+
 
 
 // Funcion para cargar los asientos en Server de Physis
