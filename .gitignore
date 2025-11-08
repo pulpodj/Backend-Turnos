@@ -1,0 +1,35 @@
+# Dependencias
+node_modules/
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
+client_secret.json
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache de npm/yarn/pnpm
+.npm
+.yarn/cache
+.pnpm-store
+
+# Cobertura de tests
+coverage/
+
+# Build de producción
+dist/
+build/
+
+# Configuración de sistema/editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# PM2 (si guardás configuraciones en JSON/YAML)
+.pm2/logs/
