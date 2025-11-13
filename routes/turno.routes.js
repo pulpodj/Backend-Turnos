@@ -5,7 +5,7 @@ const jwtVerify = require('../middleware/jwtVerify');
 const fixedToken = require('../middleware/fixedToken');
 
 //Obtiene la lista de turnos
-routes.get("/turnos",jwtVerify,turnoController.getTurno)
+routes.get("/turnos",jwtVerify,turnoController.getTurnos)
 
 //Obtiene un turno en particular 
 routes.get("/turno/:id",jwtVerify,turnoController.getTurno)
@@ -14,7 +14,7 @@ routes.get("/turno/:id",jwtVerify,turnoController.getTurno)
 routes.post("/turno",jwtVerify,turnoController.postTurno)
 
 //Modificar un Turno
-routes.put("/turno/:id",jwtVerify,turnoController.getTurno)
+routes.put("/turno",jwtVerify,turnoController.putTurno)
 
 //Borrar un turno
 routes.delete("/turno/:id",jwtVerify,turnoController.delTurno)
