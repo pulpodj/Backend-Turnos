@@ -10,6 +10,12 @@ routes.get("/turnos",jwtVerify,turnoController.getTurnos)
 //Obtiene un turno en particular 
 routes.get("/turno/:id",jwtVerify,turnoController.getTurno)
 
+//Obtiene un turno en particular 
+routes.get("/turnosProfecional/:id",jwtVerify,turnoController.getTurnosProfecional)
+
+//Obtiene un turno en particular 
+routes.get("/turnosCliente/:id",jwtVerify,turnoController.getTurnosCliente)
+
 //Agregar un turno
 routes.post("/turno",jwtVerify,turnoController.postTurno)
 

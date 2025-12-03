@@ -11,7 +11,33 @@ const secret = process.env.JWT_KEY;
 const getTurnos = async (req, res) =>{
     try {
         let turnos = await poolPg
-                       .query('SELECT dbo.getTurnos() AS result');
+                       .query('SELECT dbo.getTurnos($1) AS result', [req.query.fecha]);
+        
+        return res.status(200).send(turnos.rows[0].result);
+    }catch(error){
+        console.log(error);
+        return res.status(500).send({msg:'Error al traer los Turnos'});
+    }
+}
+
+/*Trael el listado de Usuarios*/
+const getTurnosCliente = async (req, res) =>{
+    try {
+        let turnos = await poolPg
+                       .query('SELECT dbo.getTurnosCliente($1,$2) AS result', [req.query.id,req.query.fecha]);
+        
+        return res.status(200).send(turnos.rows[0].result);
+    }catch(error){
+        console.log(error);
+        return res.status(500).send({msg:'Error al traer los Turnos'});
+    }
+}
+
+/*Trael el listado de Usuarios*/
+const getTurnosProfecional = async (req, res) =>{
+    try {
+        let turnos = await poolPg
+                       .query('SELECT dbo.getTurnosProfecional($1,$2) AS result', [req.query.id,req.query.fecha]);
         
         return res.status(200).send(turnos.rows[0].result);
     }catch(error){
@@ -86,6 +112,8 @@ const delTurno = async (req,res) => {
 
 module.exports = {
     getTurnos,
+    getTurnosCliente,
+    getTurnosProfecional,   
     getTurno,
     postTurno,
     putTurno,
