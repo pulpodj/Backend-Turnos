@@ -34,10 +34,10 @@ const getTurnosCliente = async (req, res) =>{
 }
 
 /*Trael el listado de Usuarios*/
-const getTurnosProfecional = async (req, res) =>{
+const getTurnosProfesional = async (req, res) =>{
     try {
         let turnos = await poolPg
-                       .query('SELECT dbo.getTurnosProfecional($1,$2) AS result', [req.query.id,req.query.fecha]);
+                       .query('SELECT dbo.getTurnosProfesional($1,$2) AS result', [req.query.id,req.query.fecha]);
         
         return res.status(200).send(turnos.rows[0].result);
     }catch(error){
@@ -113,7 +113,7 @@ const delTurno = async (req,res) => {
 module.exports = {
     getTurnos,
     getTurnosCliente,
-    getTurnosProfecional,   
+    getTurnosProfesional,   
     getTurno,
     postTurno,
     putTurno,

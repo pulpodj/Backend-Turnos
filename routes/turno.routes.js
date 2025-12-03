@@ -11,7 +11,7 @@ routes.get("/turnos",jwtVerify,turnoController.getTurnos)
 routes.get("/turno/:id",jwtVerify,turnoController.getTurno)
 
 //Obtiene un turno en particular 
-routes.get("/turnosProfecional",jwtVerify,turnoController.getTurnosProfecional)
+routes.get("/turnosProfesional",jwtVerify,turnoController.getTurnosProfesional)
 
 //Obtiene un turno en particular 
 routes.get("/turnosCliente",jwtVerify,turnoController.getTurnosCliente)
