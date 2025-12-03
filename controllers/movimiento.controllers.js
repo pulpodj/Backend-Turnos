@@ -38,14 +38,12 @@ const postMovimiento = async (req, res) => {
             fecha_vencimiento,
             debe,
             haber,
-            baja,
             observaciones,
-            id_cliente,
-            saldo
+            id_cliente
         } = req.body;
 
         const query = `SELECT dbo.postMovimiento(
-            $1,$2,$3,$4,$5,$6,$7,$8,$9
+            $1,$2,$3,$4,$5,$6,$7
         ) AS result`;
 
         const values = [
@@ -54,10 +52,8 @@ const postMovimiento = async (req, res) => {
             fecha_vencimiento,
             debe,
             haber,
-            baja,
             observaciones,
-            id_cliente,
-            saldo
+            id_cliente
         ];
 
         let respuesta = await poolPg.query(query, values);
@@ -79,14 +75,11 @@ const putMovimiento = async (req, res) => {
             fecha_vencimiento,
             debe,
             haber,
-            baja,
-            observaciones,
-            id_cliente,
-            saldo
+            observaciones
         } = req.body;
 
         const query = `SELECT dbo.putMovimiento(
-            $1,$2,$3,$4,$5,$6,$7,$8,$9,$10
+            $1,$2,$3,$4,$5,$6,$7
         ) AS result`;
 
         const values = [
@@ -96,10 +89,7 @@ const putMovimiento = async (req, res) => {
             fecha_vencimiento,
             debe,
             haber,
-            baja,
-            observaciones,
-            id_cliente,
-            saldo
+            observaciones
         ];
 
         let respuesta = await poolPg.query(query, values);
