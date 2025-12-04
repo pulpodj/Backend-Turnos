@@ -6,6 +6,7 @@ const profecionalRoutes = require('./routes/profecional.routes');
 const turnoRoutes = require('./routes/turno.routes');
 const movimientoRoutes = require('./routes/movimiento.routes');
 const movimientoTipoRoutes = require('./routes/movimiento_tipo.routes');
+const osRoutes = require('./routes/os.routes');
 
 const jwt = require('jsonwebtoken');
 var express = require('express');
@@ -30,7 +31,8 @@ app.use('/API',[
         profecionalRoutes,
         turnoRoutes,
         movimientoRoutes,
-        movimientoTipoRoutes
+        movimientoTipoRoutes,
+        osRoutes
         ]);  
 
     
