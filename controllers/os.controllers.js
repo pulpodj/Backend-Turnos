@@ -4,8 +4,8 @@ const { responseCreator } = require('../utils/utils');
 /* Obtener lista de tipos de movimiento */
 const getOSs = async (req, res) => {
     try { 
-        let tipos = await poolPg.query('SELECT * FROM dbo.get_obras_sociales() AS result');
-        return res.status(200).send(tipos.rows[0].result);
+        let tipos = await poolPg.query('SELECT * from dbo.get_obras_sociales() ');
+        return res.status(200).send(tipos.rows);
     } catch (error) {
         console.log(error);
         return res.status(500).send({ msg: 'Error al traer las Obras Sociales' });
@@ -15,8 +15,8 @@ const getOSs = async (req, res) => {
 /* Obtener tipo de movimiento */
 const getOS = async (req, res) => {
     try {
-        let tipo = await poolPg.query('SELECT * FROM dbo.get_obra_social($1) AS result', [req.params.id]);
-        return res.status(200).send(tipo.rows[0].result);
+        let tipo = await poolPg.query('SELECT * FROM dbo.get_obra_social($1)', [req.params.id]);
+        return res.status(200).send(tipo.rows[0]);
     } catch (error) {
         console.log(error);
         return res.status(500).send({ msg: 'Error al traer la Obra Social' });
@@ -29,7 +29,7 @@ const postOS = async (req, res) => {
     const { nombre, detalle, codigo, sistema, estado, cuit } = req.body;
 
         const query = "SELECT * FROM dbo.obra_social_post($1,$2,$3,$4,$5,$6)";
-        const respuesta = await pool.query(query, [
+        const respuesta = await poolPg.query(query, [
             nombre,
             detalle,
             codigo,
@@ -38,9 +38,9 @@ const postOS = async (req, res) => {
             cuit,
         ]);
 
-        return res.status(200).send(respuesta.rows[0].result);        
+        return res.status(200).send(respuesta.rows[0]);        
     } catch (err) {
-        console.log(`Error en postMovimientoTipo: ${err}`);
+        console.log(`Error en postObraSocial: ${err}`);
         return res.status(500).send({ msg: `Error en postMovimientoTipo: ${err}` });
     }
 };
@@ -48,12 +48,12 @@ const postOS = async (req, res) => {
 /* Actualizar Tipo Movimiento */
 const putOS = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { nombre, detalle, codigo, sistema, estado, cuit } = req.body;
+        
+        const { id, nombre, detalle, codigo, sistema, estado, cuit } = req.body;
 
         const query =
             "SELECT * FROM dbo.obra_social_put($1,$2,$3,$4,$5,$6,$7)";
-        const respuesta = await pool.query(query, [
+        const respuesta = await poolPg.query(query, [
             id,
             nombre,
             detalle,
@@ -66,7 +66,7 @@ const putOS = async (req, res) => {
         if (respuesta.rows.length === 0)
             return res.status(404).json({ error: "Obra social no encontrada" });
 
-        return res.status(200).send(respuesta.rows[0].result);
+        return res.status(200).send(respuesta.rows[0]);
     } catch (err) {
         console.log(`Error en putMovimientoTipo: ${err}`);
         return res.status(500).send({ msg: `Error en putMovimientoTipo: ${err}` });
