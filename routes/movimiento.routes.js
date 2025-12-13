@@ -8,6 +8,9 @@ routes.get('/movimientos', jwtVerify, movimientoController.getMovimientos);
 // Obtener un movimiento específico
 routes.get('/movimiento/:id', jwtVerify, movimientoController.getMovimiento);
 
+// Obtener listado de movimientos
+routes.get('/searchMovimientos', jwtVerify, movimientoController.getMovimientos);
+
 // Agregar un movimiento
 routes.post('/movimiento', jwtVerify, movimientoController.postMovimiento);
 

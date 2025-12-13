@@ -29,6 +29,36 @@ const getMovimiento = async (req, res) => {
     }
 };
 
+/* Obtener lista de Movimientos */
+const getSearchMovimientos = async (req, res) => {
+    try {
+        
+        const {
+            fecha_desde,
+            fecha_hasta,
+            id_cliente = 0,
+            id_movimiento_tipo = 0
+        } = req.query;
+
+        const query = `
+            SELECT * 
+            FROM dbo.get_movimientos($1, $2, $3, $4)
+        `;
+
+        const movimientos = await poolPg.query(query, [
+            fecha_desde,
+            fecha_hasta,
+            id_cliente,
+            id_movimiento_tipo
+        ]);
+
+        return res.status(200).send(movimientos.rows);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ msg: 'Error al traer los Movimientos' });
+    }
+};
+
 /* Crear un nuevo Movimiento */
 const postMovimiento = async (req, res) => {
     try {
@@ -121,6 +151,7 @@ const delMovimiento = async (req, res) => {
 module.exports = {
     getMovimientos,
     getMovimiento,
+    getSearchMovimientos,
     postMovimiento,
     putMovimiento,
     delMovimiento
