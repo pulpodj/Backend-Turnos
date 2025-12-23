@@ -6,7 +6,7 @@ const jwtVerify = require('../middleware/jwtVerify');
 routes.get('/historias-clinicas/:id_paciente', jwtVerify, historiaClinicaController.getHistoriasClinicas);
 
 // Obtener una historia clínica puntual
-routes.get('/historia-clinica/:id/:id_paciente', jwtVerify, historiaClinicaController.getHistoriaClinica);
+routes.get('/historia-clinica/:id', jwtVerify, historiaClinicaController.getHistoriaClinica);
 
 // Crear historia clínica
 routes.post('/historia-clinica', jwtVerify, historiaClinicaController.postHistoriaClinica);
@@ -15,6 +15,6 @@ routes.post('/historia-clinica', jwtVerify, historiaClinicaController.postHistor
 routes.put('/historia-clinica', jwtVerify, historiaClinicaController.putHistoriaClinica);
 
 // Eliminar historia clínica (baja lógica)
-routes.delete('/historia-clinica/:id/:id_paciente', jwtVerify, historiaClinicaController.delHistoriaClinica);
+routes.delete('/historia-clinica/:id', jwtVerify, historiaClinicaController.delHistoriaClinica);
 
 module.exports = routes;
