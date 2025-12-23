@@ -21,7 +21,7 @@ const getHistoriasClinicas = async (req, res) => {
 /* Obtener una historia clínica */
 const getHistoriaClinica = async (req, res) => {
     try {
-        const  id = req.params;
+        const  id = req.params.id;
 
         const historia = await poolPg.query(
             'SELECT * FROM dbo.get_historia_clinica($1)',
@@ -124,7 +124,7 @@ const putHistoriaClinica = async (req, res) => {
 /* Eliminar historia clínica (baja lógica) */
 const delHistoriaClinica = async (req, res) => {
     try {
-        const id = req.params;
+        const id = req.params.id;
 
         const query = `SELECT dbo.historia_clinica_delete($1) AS result`;
         const values = [id];
