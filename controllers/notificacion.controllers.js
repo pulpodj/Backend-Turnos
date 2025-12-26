@@ -36,11 +36,16 @@ const postMailNotificacion = async (req, res) => {
 async function enviarMailError(texto) {
    try {
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.USUARIO_MAIL,
                 pass: process.env.PASS_MAIL
-            }
+            },
+            connectionTimeout: 10000,  // 10 segundos
+            greetingTimeout: 10000,
+            socketTimeout: 10000
         });
         
         let mailOptions = {
