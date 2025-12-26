@@ -8,6 +8,7 @@ const movimientoRoutes = require('./routes/movimiento.routes');
 const movimientoTipoRoutes = require('./routes/movimiento_tipo.routes');
 const osRoutes = require('./routes/os.routes');
 const historiaRoutes = require('./routes/historia_clinica.routes');
+const notificacionRoutes = require('./routes/notificacion.routes');
 
 const jwt = require('jsonwebtoken');
 var express = require('express');
@@ -34,7 +35,8 @@ app.use('/API',[
         movimientoRoutes,
         movimientoTipoRoutes,
         osRoutes,
-        historiaRoutes
+        historiaRoutes,
+        notificacionRoutes,
         ]);  
 
     
