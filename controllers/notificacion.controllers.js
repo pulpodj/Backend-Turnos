@@ -45,7 +45,7 @@ async function enviarMailError(texto) {
         
         let mailOptions = {
             from: process.env.USUARIO_MAIL,
-            to: 'saimarcoop@gmail.com',
+            to: 'neffenpioli@gmail.com',
             subject: 'Pedido de Turno - Sistema de Turnos',
             text: texto
         };

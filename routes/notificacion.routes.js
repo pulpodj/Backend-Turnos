@@ -6,7 +6,7 @@ const fixedToken = require('../middleware/fixedToken');
 
 
 //Agregar un turno
-routes.post("/enviarMail",jwtVerify,notificacionController.postMailNotificacion);
+routes.post("/enviarMail",fixedToken,notificacionController.postMailNotificacion);
 
 
 
