@@ -82,8 +82,136 @@ async function enviarMailError(texto) {
 }
 
 
+/* Obtener listado de notificaciones */
+const getNotificaciones = async (req, res) => {
+    try {
+        const notificaciones = await poolPg.query(
+            'SELECT * FROM dbo.get_notificaciones()'
+        );
 
+        return res.status(200).send(notificaciones.rows);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ msg: 'Error al traer las notificaciones' });
+    }
+};
+
+/* Obtener una notificación */
+const getNotificacion = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const notificacion = await poolPg.query(
+            'SELECT * FROM dbo.get_notificacion($1,$2)',
+            [id]
+        );
+
+        if (notificacion.rows.length === 0) {
+            return res.status(404).send({ msg: 'Notificación no encontrada' });
+        }
+
+        return res.status(200).send(notificacion.rows[0]);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ msg: 'Error al traer la notificación' });
+    }
+};
+
+/* Crear notificación */
+const postNotificacion = async (req, res) => {
+    try {
+        const {
+            id_tipo,
+            detalle,
+            fecha
+        } = req.body;
+
+        const query = `
+            SELECT * FROM dbo.post_notificacion(
+                $1,$2,$3
+            )
+        `;
+
+        const values = [
+            id_tipo,
+            detalle,
+            fecha
+        ];
+
+        const respuesta = await poolPg.query(query, values);
+
+        return res.status(200).send(respuesta.rows[0]);
+    } catch (err) {
+        console.log(`Error en postNotificacion: ${err}`);
+        return res.status(500).send({ msg: 'Error al crear la notificación' });
+    }
+};
+
+/* Actualizar notificación */
+const putNotificacion = async (req, res) => {
+    try {
+        const {
+            id,
+            id_tipo,
+            detalle,
+            fecha
+        } = req.body;
+
+        const query = `
+            SELECT * FROM dbo.put_notificacion(
+                $1,$2,$3,$4
+            )
+        `;
+
+        const values = [
+            id,
+            id_tipo,
+            detalle,
+            fecha
+        ];
+
+        const respuesta = await poolPg.query(query, values);
+
+        if (respuesta.rows.length === 0) {
+            return res.status(404).send({ msg: 'Notificación no encontrada o dada de baja' });
+        }
+
+        return res.status(200).send(respuesta.rows[0]);
+    } catch (err) {
+        console.log(`Error en putNotificacion: ${err}`);
+        return res.status(500).send({ msg: 'Error al actualizar la notificación' });
+    }
+};
+
+/* Eliminar notificación (baja lógica) */
+const delNotificacion = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const query = `
+            SELECT dbo.delete_notificacion($1,$2) AS result
+        `;
+
+        const values = [id];
+
+        const respuesta = await poolPg.query(query, values);
+
+        if (!respuesta.rows[0].result) {
+            return res.status(404).send({ msg: 'Notificación no encontrada o ya eliminada' });
+        }
+
+        return res.status(200).send({ deleted: true });
+    } catch (err) {
+        console.log(`Error en delNotificacion: ${err}`);
+        return res.status(500).send({ msg: 'Error al eliminar la notificación' });
+    }
+};
 
 module.exports = {
-    postMailNotificacion
+    postMailNotificacion,
+    getNotificaciones,
+    getNotificacion,
+    postNotificacion,
+    putNotificacion,
+    delNotificacion 
 }
