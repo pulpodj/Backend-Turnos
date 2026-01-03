@@ -63,10 +63,10 @@ const getTurno = async (req, res) =>{
 /*Crea un nuevo Usuario */
 const postTurno = async (req, res) => {
     try {
-        const {idPaciente,idProfecional,fecha,horaIni,horaFin,obs} = req.body;
+        const {idPaciente,idProfecional,fecha,horaIni,horaFin,obs,idTratamiento} = req.body;
         
-        const query = `SELECT dbo.postTurno($1,$2,$3,$4,$5,$6)`;
-        const values = [idPaciente,idProfecional,fecha,horaIni,horaFin,obs];
+        const query = `SELECT dbo.postTurno($1,$2,$3,$4,$5,$6,$7)`;
+        const values = [idPaciente,idProfecional,fecha,horaIni,horaFin,obs,idTratamiento];
         let respuesta = await poolPg.query(query, values);
 
         return res.status(200).send(respuesta.rows[0]);
@@ -79,10 +79,10 @@ const postTurno = async (req, res) => {
 /*Actualizar Usuario */
 const putTurno = async (req, res) =>{
     try {
-        const {id,idPaciente,idProfecional,fecha,horaIni,horaFin,obs,estado} = req.body;
+        const {id,idPaciente,idProfecional,fecha,horaIni,horaFin,obs,estado,idTratamiento} = req.body;
 
-        const query = `SELECT dbo.putTurno($1,$2,$3,$4,$5,$6,$7,$8)`;
-        const values = [id,idPaciente,idProfecional,fecha,horaIni,horaFin,obs,estado];
+        const query = `SELECT dbo.putTurno($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
+        const values = [id,idPaciente,idProfecional,fecha,horaIni,horaFin,obs,estado,idTratamiento];
         let respuesta = await poolPg.query(query, values);
 
         return res.status(200).send(respuesta.rows[0]);
