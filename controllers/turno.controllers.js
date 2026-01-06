@@ -64,21 +64,17 @@ const getTurno = async (req, res) =>{
 const postTurno = async (req, res) => {
     try {
         const {idPaciente,idProfecional,fecha,horaIni,horaFin,obs,idTratamiento} = req.body;
-        
         if(idTratamiento===3){
-            const query = `INSERT INTO dbo.turnos (
-                            paciente_id, profesional_id, tratamiento_id, fecha, hora_inicio, hora_fin, observaciones,baja)
+            const query = `INSERT INTO dbo.turnos (paciente_id, profesional_id, tratamiento_id, fecha, hora_inicio, hora_fin, observaciones,baja)
                             VALUES ($1,$2,$3,$4,$5,$6,$7,false)
-                            RETURNING * INTO nuevo_turno;
-    
-                            RETURN json_build_object(
-                                    'success', true,
-                                    'message', 'Turno creado correctamente.',
-                                    'turno', row_to_json(nuevo_turno)
-                            )`
+                            RETURNING * `;
         const values = [idPaciente,idProfecional,idTratamiento,fecha,horaIni,horaFin,obs];
-        let respuesta = await poolPg.query(query, values); 
-        return res.status(200).send(respuesta.rows[0]);
+        let respuesta = await poolPg.query(query, values);
+
+        const respuestaFinal = { success: true,
+                                 message: 'Turno creado correctamente.',
+                                 turno:respuesta.rows[0] };
+        return res.status(200).send(respuestaFinal);
         }else{
         const query = `SELECT dbo.postTurno($1,$2,$3,$4,$5,$6,$7)`;
         const values = [idPaciente,idProfecional,fecha,horaIni,horaFin,obs,idTratamiento];
