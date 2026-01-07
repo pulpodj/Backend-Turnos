@@ -161,7 +161,15 @@ const postPaciente = async (req, res) => {
         const passHash = await bcrypt.hash( clave,saltRounds); 
         
         const query = `SELECT dbo.postPaciente($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
-        const values = [nombre,dni,celular,mail,fechaNacimiento,direccion,usuario, passHash,idObraSocial];
+        const values = [nombre.trim(),
+            dni || null,
+            celular || null,
+            mail || null,
+            fechaNacimiento || null,
+            direccion || null,
+            usuario.trim(),
+            clave,
+            idObraSocial || null];
         let respuesta = await poolPg.query(query, values);
 
         return res.status(200).send(respuesta.rows[0]);
