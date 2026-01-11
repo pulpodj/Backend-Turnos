@@ -186,7 +186,7 @@ const putNotificacion = async (req, res) => {
 /* Eliminar notificación (baja lógica) */
 const delNotificacion = async (req, res) => {
     try {
-        const { id } = req.params;
+        const id = req.query.id;
 
         const query = `
             SELECT dbo.delete_notificacion($1,$2) AS result
