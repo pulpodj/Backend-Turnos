@@ -99,7 +99,7 @@ const getNotificaciones = async (req, res) => {
 /* Obtener una notificación */
 const getNotificacion = async (req, res) => {
     try {
-        const { id } = req.params;
+        const id = req.query.id;
 
         const notificacion = await poolPg.query(
             'SELECT * FROM dbo.get_notificacion($1,$2)',
