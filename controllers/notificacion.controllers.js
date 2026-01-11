@@ -99,13 +99,14 @@ const getNotificaciones = async (req, res) => {
 /* Obtener una notificación */
 const getNotificacion = async (req, res) => {
     try {
-        const id = req.query.id;
+        const {id} = req.params;
 
-        const notificacion = await poolPg.query(
-            'SELECT * FROM dbo.get_notificacion($1,$2)',
-            [id]
-        );
+        const query = `SELECT * FROM dbo.get_notificacion($1)`;
 
+        const values = [id];
+
+        const notificacion = await poolPg.query(query, values); 
+        
         if (notificacion.rows.length === 0) {
             return res.status(404).send({ msg: 'Notificación no encontrada' });
         }
@@ -186,10 +187,10 @@ const putNotificacion = async (req, res) => {
 /* Eliminar notificación (baja lógica) */
 const delNotificacion = async (req, res) => {
     try {
-        const id = req.query.id;
+        const {id} = req.params;
 
         const query = `
-            SELECT dbo.delete_notificacion($1,$2) AS result
+            SELECT dbo.delete_notificacion($1) AS result
         `;
 
         const values = [id];
