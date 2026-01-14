@@ -12,7 +12,7 @@ routes.get('/notificaciones', jwtVerify, notificacionController.getNotificacione
 routes.get('/notificacion/:id', jwtVerify, notificacionController.getNotificacion);
 
 // Crear notificación
-routes.post('/notificacion', jwtVerify, notificacionController.postNotificacion);
+routes.post('/notificacion', notificacionController.postNotificacion);
 
 // Actualizar notificación
 routes.put('/notificacion', jwtVerify, notificacionController.putNotificacion);
