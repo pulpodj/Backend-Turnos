@@ -43,7 +43,7 @@ const getSearchMovimientos = async (req, res) => {
 
         const query = `
             SELECT * 
-            FROM dbo.getSearchmovimientos($1, $2, $3, $4)
+            FROM dbo.getSearchmovimientos($1, $2, $3, $4, $5)
         `;
 
         const movimientos = await poolPg.query(query, [
