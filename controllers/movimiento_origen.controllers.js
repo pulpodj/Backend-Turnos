@@ -26,10 +26,10 @@ const getMovimientoOrigen = async (req, res) => {
 /* Crear Orígen Movimiento */
 const postMovimientoOrigen = async (req, res) => {
     try {
-        const { tipo, descripcion } = req.body;
+        const { origen, descripcion } = req.body;
 
         const query = `SELECT dbo.postMovimientoOrigen($1, $2) AS result`;
-        const values = [tipo, descripcion];
+        const values = [origen, descripcion];
 
         let respuesta = await poolPg.query(query, values);
 
@@ -43,10 +43,10 @@ const postMovimientoOrigen = async (req, res) => {
 /* Actualizar Orígen Movimiento */
 const putMovimientoOrigen = async (req, res) => {
     try {
-        const { id, tipo, descripcion } = req.body;
+        const { id, origen, descripcion } = req.body;
 
         const query = `SELECT dbo.putMovimientoOrigen($1, $2, $3) AS result`;
-        const values = [id, tipo, descripcion];
+        const values = [id, origen, descripcion];
 
         let respuesta = await poolPg.query(query, values);
 
