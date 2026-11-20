@@ -47,8 +47,8 @@ const getSearchMovimientos = async (req, res) => {
         `;
 
         const movimientos = await poolPg.query(query, [
-            fecha_desde,
-            fecha_hasta,
+            fecha_desde || null,
+            fecha_hasta || null,
             id_cliente,
             id_movimiento_tipo,
             id_movimiento_origen,
