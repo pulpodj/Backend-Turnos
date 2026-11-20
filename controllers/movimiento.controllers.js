@@ -114,7 +114,7 @@ const putMovimiento = async (req, res) => {
         } = req.body;
 
         const query = `SELECT dbo.putMovimiento(
-            $1,$2,$3,$4,$5,$6,$7
+            $1,$2,$3,$4,$5,$6,$7,$8
         ) AS result`;
 
         const values = [
