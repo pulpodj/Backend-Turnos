@@ -64,6 +64,7 @@ const postMovimiento = async (req, res) => {
     try {
         const {
             id_movimiento_tipo,
+            id_movimiento_origen = 0,
             fecha,
             fecha_vencimiento,
             debe,
@@ -73,11 +74,12 @@ const postMovimiento = async (req, res) => {
         } = req.body;
 
         const query = `SELECT dbo.postMovimiento(
-            $1,$2,$3,$4,$5,$6,$7
+            $1,$2,$3,$4,$5,$6,$7,$8
         ) AS result`;
 
         const values = [
             id_movimiento_tipo,
+            id_movimiento_origen,
             fecha,
             fecha_vencimiento,
             debe,
