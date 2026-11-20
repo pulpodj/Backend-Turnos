@@ -6,6 +6,7 @@ const profecionalRoutes = require('./routes/profecional.routes');
 const turnoRoutes = require('./routes/turno.routes');
 const movimientoRoutes = require('./routes/movimiento.routes');
 const movimientoTipoRoutes = require('./routes/movimiento_tipo.routes');
+const movimientoOrigenRoutes = require('./routes/movimiento_origen.routes');
 const osRoutes = require('./routes/os.routes');
 const historiaRoutes = require('./routes/historia_clinica.routes');
 const notificacionRoutes = require('./routes/notificacion.routes');
@@ -34,6 +35,7 @@ app.use('/API',[
         turnoRoutes,
         movimientoRoutes,
         movimientoTipoRoutes,
+        movimientoOrigenRoutes,
         osRoutes,
         historiaRoutes,
         notificacionRoutes,
