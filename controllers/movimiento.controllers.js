@@ -37,7 +37,8 @@ const getSearchMovimientos = async (req, res) => {
             fecha_desde,
             fecha_hasta,
             id_cliente = 0,
-            id_movimiento_tipo = 0
+            id_movimiento_tipo = 0,
+            id_movimiento_origen = 0
         } = req.query;
 
         const query = `
@@ -49,7 +50,8 @@ const getSearchMovimientos = async (req, res) => {
             fecha_desde,
             fecha_hasta,
             id_cliente,
-            id_movimiento_tipo
+            id_movimiento_tipo,
+            id_movimiento_origen,
         ]);
 
         return res.status(200).send(movimientos.rows);
@@ -103,6 +105,7 @@ const putMovimiento = async (req, res) => {
         const {
             id,
             id_movimiento_tipo,
+            id_movimiento_origen = 0,
             fecha,
             fecha_vencimiento,
             debe,
@@ -117,6 +120,7 @@ const putMovimiento = async (req, res) => {
         const values = [
             id,
             id_movimiento_tipo,
+            id_movimiento_origen,
             fecha,
             fecha_vencimiento,
             debe,
